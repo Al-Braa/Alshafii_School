@@ -1,0 +1,29 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+{% block title %}{% trans "Certificates" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+    <h1>{% trans "My Certificates" %}</h1>
+    <p>{% blocktrans with count=certificate_count %}You have {{ count }} certificates.{% endblocktrans %}</p>
+    <div class="row">
+        {% for certificate in certificates %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ certificate.name }}</h5>
+                    <p class="card-text"><strong>{% trans "Date Added" %}:</strong> {{ certificate.date_added }} | {{
+                        certificate.date_added|hijri_date:LANGUAGE_CODE }}</p>
+                    {% if certificate.file %}
+                    <a href="{{ certificate.file.url }}" class="btn btn-primary" target="_blank">{% trans "Download
+                        Certificate" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

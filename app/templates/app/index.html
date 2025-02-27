@@ -1,0 +1,163 @@
+{% extends "app/layout.html" %}
+{% load i18n %}
+{% load custom_tags %}
+{% load static %}
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{% trans "Courses" %}</h1>
+    <br>
+    <!-- Filter and Sort Form -->
+    <!-- <form method="get" class="mb-4">
+        <div class="form-row">
+            <div class="col">
+                <select name="status" class="form-control">
+                    <option value="">{% trans "Filter by Status" %}</option>
+                    <option value="not_yet" {% if filter_status == 'not_yet' %}selected{% endif %}>{% trans "Not Yet" %}</option>
+                    <option value="listening" {% if filter_status == 'listening' %}selected{% endif %}>{% trans "Listening" %}</option>
+                    <option value="watched" {% if filter_status == 'watched' %}selected{% endif %}>{% trans "Watched" %}</option>
+                </select>
+            </div>
+            <div class="col">
+                <select name="sort_by" class="form-control">
+                    <option value="date" {% if sort_by == 'date' %}selected{% endif %}>{% trans "Sort by Date" %}</option>
+                    <option value="name" {% if sort_by == 'name' %}selected{% endif %}>{% trans "Sort by Name" %}</option>
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">{% trans "Apply" %}</button>
+            </div>
+        </div>
+    </form> -->
+    <style>
+        .watch-insturct {
+            color: red;
+            font-weight: bold;
+        }
+
+        .deadline {
+            color: rgb(125, 0, 0);
+            font-weight: bold;
+        }
+    </style>
+
+    {% for course in courses %}
+    {% if course.lecture_set.all %}
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <h2 class="mb-2 mb-md-0">{{ course.name }}</h2>
+        {% if course_exams|get_status:course.id|default_if_none:False %}
+        {% if cannot_access|get_status:course.id %}
+        <span class="watch-insturct mb-2 mb-md-0">{% trans "Watch lectures first." %}</span>
+        {% else %}
+        <a href="{% url 'access_exam' course.id %}" target="_blank" class="btn btn-warning mb-2 mb-md-0">
+            {% trans "View Exams" %}
+        </a>
+        {% endif %}
+        <span class="deadline">
+            {% trans "Deadline: " %}{{ deadlines|get_status:course.id }}
+        </span>
+        {% endif %}
+    </div>
+        <br>
+    <div class="row">
+        {% for lecture in course.lecture_set.all %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ lecture.name }}</h5>
+                    <p class="card-text">
+                        <strong>{% trans "Date" %}:</strong> 
+                        {{ lecture.date }} ({{ lecture.hijri_date}})
+                    </p>
+                    <p class="card-text">
+                        <strong>{% trans "Time" %}:</strong> 
+                        {{ lecture.start_time }} - {{lecture.end_time }}
+                    </p>
+                    {% if lecture.is_time %}
+                    <a href="{{ lecture.link }}" class="btn btn-primary" target="_blank">{% trans "Join Lecture" %}</a>
+                    {% else %}
+                    <a href="#" class="btn btn-primary disabled" aria-disabled="true">{% trans "Join Lecture" %}</a>
+                    {% endif %}
+                    {% if lecture.file %}
+                    <a href="{{ lecture.file.url }}" class="btn btn-success" target="_blank" >{% trans "Details" %}</a>
+                    {% endif %}
+                    <p class="card-text"><strong>{% trans "Status" %}:</strong> 
+                        {{lecture_attendance|get_status:lecture.id|format_status:LANGUAGE_CODE }}
+                    </p>
+                    <form method="post" action="{% url 'index' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="lecture_id" value="{{ lecture.id }}">
+                        <select name="status" class="form-control">
+                            <option value="" disabled selected>{% trans "Select status" %}</option>
+                            <option value="not_yet" {% if lecture_attendance|get_status:lecture.id == 'not_yet' %}selected{% endif %}>
+                                {% trans "Not Yet" %}
+                            </option>
+                            <option value="listening" {% if lecture_attendance|get_status:lecture.id == 'listening' %}selected{% endif %}>
+                                {% trans "Listening" %}
+                            </option>
+                            <option value="watched" {% if lecture_attendance|get_status:lecture.id == 'watched' %}selected{% endif %}>
+                                {% trans "Watched" %}
+                            </option>
+                        </select>
+                        <br>
+                        <button type="submit" class="btn btn-secondary">{% trans "Update Status" %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% if lectures %}
+    <h2>{% trans "Single Lectures" %}</h2>
+    <div class="row">
+        {% for lecture in lectures %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ lecture.name }}</h5>
+                    <p class="card-text">
+                        <strong>{% trans "Date" %}:</strong>
+                        {{ lecture.date }} ({{ lecture.hijri_date}})
+                    </p>
+                    <p class="card-text">
+                        <strong>{% trans "Time" %}:</strong>
+                         {{ lecture.start_time }} - {{lecture.end_time }}
+                    </p>
+                    {% if lecture.is_time %}
+                    <a href="{{ lecture.link }}" class="btn btn-primary" target="_blank">{% trans "Join Lecture" %}</a>
+                    {% else %}
+                    <a href="#" class="btn btn-primary disabled" aria-disabled="true">{% trans "Join Lecture" %}</a>
+                    {% endif %}
+                    <p class="card-text">
+                        <strong>{% trans "Status" %}:</strong>
+                        {{lecture_attendance|get_status:lecture.id|format_status:LANGUAGE_CODE }}
+                    </p>
+                    <form method="post" action="{% url 'index' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="lecture_id" value="{{ lecture.id }}">
+                        <select name="status" class="form-control">
+                            <option value="" disabled selected>{% trans "Select status" %}</option>
+                            <option value="not_yet" {% if lecture_attendance|get_status:lecture.id == 'not_yet'%}selected{% endif %}>
+                                {% trans "Not Yet" %}
+                            </option>
+                            <option value="listening" {% if lecture_attendance|get_status:lecture.id == 'listening'%}selected{% endif %}>
+                                {% trans "Listening" %}
+                            </option>
+                            <option value="watched" {% if lecture_attendance|get_status:lecture.id == 'watched'%}selected{% endif %}>
+                                {% trans "Watched" %}
+                            </option>
+                        </select>
+                        <br>
+                        <button type="submit" class="btn btn-secondary">{% trans "Update Status" %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

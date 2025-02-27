@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-27 22:12+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\app\templates\app\certificates.html:5
+#, fuzzy
+#| msgid "My Certificates"
+msgid "Certificates"
+msgstr "شهاداتي"
+
+#: .\app\templates\app\certificates.html:9 .\app\templates\app\layout.html:108
+msgid "My Certificates"
+msgstr "شهاداتي"
+
+#: .\app\templates\app\certificates.html:10
+#, python-format
+msgid "You have %(count)s certificates."
+msgstr ".لديك %(count)s شهادة"
+
+#: .\app\templates\app\certificates.html:17
+msgid "Date Added"
+msgstr "تاريخ الإضافة"
+
+#: .\app\templates\app\index.html:5
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+#: .\app\templates\app\index.html:9
+msgid "Courses"
+msgstr "الدورات"
+
+#: .\app\templates\app\index.html:15
+msgid "Filter by Status"
+msgstr ""
+
+#: .\app\templates\app\index.html:16 .\app\templates\app\index.html:91
+#: .\app\templates\app\index.html:141
+msgid "Not Yet"
+msgstr "لم يتم الحضور"
+
+#: .\app\templates\app\index.html:17 .\app\templates\app\index.html:94
+#: .\app\templates\app\index.html:144
+msgid "Listening"
+msgstr "يتم الحضور"
+
+#: .\app\templates\app\index.html:18 .\app\templates\app\index.html:97
+#: .\app\templates\app\index.html:147
+msgid "Watched"
+msgstr "تم الحضور"
+
+#: .\app\templates\app\index.html:23
+msgid "Sort by Date"
+msgstr ""
+
+#: .\app\templates\app\index.html:24
+msgid "Sort by Name"
+msgstr ""
+
+#: .\app\templates\app\index.html:28
+msgid "Apply"
+msgstr ""
+
+#: .\app\templates\app\index.html:50
+msgid "Watch lectures first."
+msgstr "احضر المحاضرات أولا."
+
+#: .\app\templates\app\index.html:53
+msgid "View Exams"
+msgstr "احضر الامتحان"
+
+#: .\app\templates\app\index.html:57
+msgid "Deadline: "
+msgstr "الموعد النهائي: "
+
+#: .\app\templates\app\index.html:69 .\app\templates\app\index.html:119
+msgid "Date"
+msgstr "التاريخ"
+
+#: .\app\templates\app\index.html:73 .\app\templates\app\index.html:123
+msgid "Time"
+msgstr "الوقت"
+
+#: .\app\templates\app\index.html:77 .\app\templates\app\index.html:79
+#: .\app\templates\app\index.html:127 .\app\templates\app\index.html:129
+msgid "Join Lecture"
+msgstr "انضم إلى المحاضرة"
+
+#: .\app\templates\app\index.html:81
+msgid "Details"
+msgstr "تفاصيل"
+
+#: .\app\templates\app\index.html:82 .\app\templates\app\index.html:132
+msgid "Status"
+msgstr "الحالة"
+
+#: .\app\templates\app\index.html:89 .\app\templates\app\index.html:139
+#, fuzzy
+#| msgid "Status"
+msgid "Select status"
+msgstr "الحالة"
+
+#: .\app\templates\app\index.html:101 .\app\templates\app\index.html:151
+msgid "Update Status"
+msgstr "حدّث الحالة"
+
+#: .\app\templates\app\index.html:111
+msgid "Single Lectures"
+msgstr "محاضرات فردية"
+
+#: .\app\templates\app\layout.html:10
+msgid "My Site"
+msgstr ""
+
+#: .\app\templates\app\layout.html:49
+msgid "Language"
+msgstr "اللغة"
+
+#: .\app\templates\app\layout.html:82
+msgid "Menu"
+msgstr "قائمة"
+
+#: .\app\templates\app\layout.html:85 .\app\templates\app\profile.html:4
+#: .\app\templates\app\profile.html:8
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+#: .\app\templates\app\layout.html:87
+msgid "Toggle Dark Mode"
+msgstr "الوضع الداكن"
+
+#: .\app\templates\app\layout.html:92
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: .\app\templates\app\layout.html:120
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: .\app\templates\app\layout.html:123
+msgid "Register"
+msgstr "تسجيل"
+
+#: .\app\templates\app\profile.html:12
+msgid "Save changes"
+msgstr "حفظ التغييرات"
+
+#: .\deen\settings.py:56
+msgid "English"
+msgstr "الإنجليزية"
+
+#: .\deen\settings.py:57
+msgid "Arabic"
+msgstr "العربية"
+
+#: .\deen\urls.py:29
+msgid "admin/"
+msgstr "مشرف/"
+
+#~ msgid "Download Certificate"
+#~ msgstr "تحميل الشهادة"
